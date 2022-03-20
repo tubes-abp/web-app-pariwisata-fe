@@ -1,0 +1,130 @@
+/* 
+* Scrollbar Setting 
+*/
+@mixin scrollbarSetup($scrollbarColor, $scrollbarBgColor, $scrollbarWidth) {
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: $scrollbarWidth;
+  }
+  
+  &::-webkit-scrollbar-track {
+      background: rgba($color: $scrollbarBgColor, $alpha: .5);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+      background: $scrollbarColor;
+  }
+}
+
+/*
+* Webkit Setup
+*/
+@mixin webkitSetup($type, $value){
+  @if $type == 'transform-rotate'{
+    transform: rotate($value);
+    -webkit-transform: rotate($value);
+    -moz-transform: rotate($value);
+    -ms-transform: rotate($value);
+    -o-transform: rotate($value);
+  }
+
+  @if $type == 'filter-drop-shadow'{
+      filter: drop-shadow($value);
+      -webkit-filter: drop-shadow($value);
+      -moz-transform: drop-shadow($value);
+      -ms-transform: drop-shadow($value);
+      -o-transform: drop-shadow(5px 5px 5px #222);
+  }
+}
+
+/* 
+* Disable highlight/copy/scale/selection in UIWebView 
+*/
+@mixin disableDefaultAction() {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: pan-x pan-y;
+  user-select: none;
+}
+
+/* 
+* For normal device screen size 
+* Moto G4, Galaxy S5, Pixel 2, Iphone 5 SE, Iphone 6/7/8 + Plus,
+*/
+@mixin normalDeviceScreen(){
+@media screen and (max-width: 740px) and (min-height: 320px){ @content; }
+}
+
+/* 
+* For normal device screen size 
+* Laptop, etc
+*/
+@mixin desktopDeviceScreen(){
+@media screen and (min-width:961px){ @content; }
+}
+
+/* 
+* For normal device screen size 
+* Tablet, etc
+*/
+@mixin tabletDeviceScreen(){
+  @media (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape) and (max-device-aspect-ratio: 15/9) {
+  @content;
+}
+}
+
+/* 
+* Hover Effect 
+*/
+@mixin hoverEffect($type) {
+  @if $type == 'filter-brightness' {
+    &:hover, &:active, &:focus {
+      filter: brightness(1.1) !important; 
+    }
+  }
+
+  @if $type == 'filter-brightness-grayscale'{
+    &:hover, &:active, &:focus {
+      filter: grayscale(1) brightness(1.1) !important; 
+    }
+  }
+}
+
+
+/* 
+* Force Landscape while Portrait
+*/
+@mixin forceLandscape {
+  @media only screen and (orientation: portrait) {
+      transform: rotate(90deg);
+      transform-origin: 50vmin 50vmin;
+      width: 100vmax !important;
+  }
+}
+
+/* 
+* Condition when portrait
+*/
+@mixin onPortrait{
+@media screen and (orientation:portrait) {
+  @content;
+}
+}
+
+/* Setup List Style */
+@mixin setupListStyle($paddingOuter: 0 0 0 0, $marginOuter: 0 0 0 0, $marginText: 0 0 1% 0, $linkColor:white){
+> ol,li {
+  padding: $paddingOuter;
+  margin: $marginOuter;
+  list-style-type: decimal !important;
+  text-align: justify;
+  
+  li {
+      margin: $marginText;
+      a{
+          color: $linkColor;
+      }
+  }
+}
+}

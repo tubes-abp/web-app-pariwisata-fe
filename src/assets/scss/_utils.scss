@@ -1,0 +1,143 @@
+// Display
+.flex{ display: flex !important;}
+.block{ display: block !important;}
+.none{ display: none !important;}
+
+.flex-wrap,
+.flex-center-center,
+.flex-column-center-center,
+.flex-column,
+.flex-reverse
+{
+    @extend .flex;
+}
+
+// Flex Wrap
+.flex-wrap{ flex-wrap: wrap;}
+
+// Flex General
+.flex-center-center{
+    @extend .justify-center;
+    @extend .align-center;
+}
+.flex-column-center-center{
+    @extend .flex-column;
+    @extend .justify-center;
+    @extend .align-center;
+}
+
+// Flex Direction
+.flex-row-reverse{ flex-direction: row-reverse !important;}
+.flex-col-reverse{ flex-direction: column-reverse !important;}
+.flex-column{ flex-direction: column !important; }
+
+// Justify Content
+.justify-center{ justify-content: center !important; }
+.justify-around{ justify-content: space-around !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-end{ justify-content: flex-end !important; }
+.justify-self-end{ justify-self: flex-end !important;}
+
+// Align Items
+.align-center{ align-items: center !important; }
+.align-end{ align-items: flex-end !important; }
+.align-self-center{ align-self: center !important; }
+.align-self-end{ align-self: flex-end !important; }
+
+// Text
+.text-uppercase{ text-transform: uppercase !important; }
+.text-capitalize{ text-transform: capitalize !important; }
+.text-center{ text-align: center !important; }
+.text-justify{ text-align: justify !important; }
+.text-none{ text-decoration: none !important; }
+.text-underline{ text-decoration: underline !important;}
+.text-bold{ font-weight: bold !important; }
+.text-center-uppercase{
+    @extend .text-uppercase;
+    @extend .text-center;
+}
+
+// Sizing
+.h-100{ height: 100% !important; }
+.w-100{ width: 100% !important; }
+.hw-100{ 
+    @extend .h-100;
+    @extend .w-100;
+}
+
+// Others
+.border-0{ border: 0 !important; }
+.outline-0{ outline: 0 !important; }
+.cursor-pointer{ cursor: pointer;}
+
+// Image
+.img-fullheight,
+.img-fullwidth{
+    vertical-align: middle;
+}
+.img-fullwidth{ 
+    width: 100%; 
+    height: auto;
+}
+
+.img-fullheight{
+    height: 100%;
+    width: auto;
+}
+
+// Margin
+.mx-auto{ margin: 0 auto !important; }
+.my-auto{ margin: auto 0 !important;}
+.mr-auto{ margin-right: auto !important; }
+.ml-auto{ margin-left: auto !important; }
+
+// Position
+.pos-relative{ position: relative !important; }
+.pos-absolute{ position: absolute !important; }
+.pos-absolute-fullcenter{ 
+    @extend .pos-absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.pos-absolute-xcenter{
+    @extend .pos-absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.pos-absolute-ycenter{
+    @extend .pos-absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.pos-absolute-end{
+    @extend .pos-absolute;
+    bottom:0;
+}
+
+// Background and Font Color
+$sampleColor: red, blue, pink, green, purple, black, white, yellow, orange;
+@each $color in $sampleColor{
+    .bg-#{$color}{
+        background-color: $color;
+    }
+    .text-#{$color}{
+        color: $color;
+    }
+    .border-#{$color}{
+        border: 1.5px solid $color;
+    }
+}
+
+// Custom Game Setup
+.grayscale{ 
+    filter: grayscale(1) brightness(90%) !important; 
+}
+
+.low-brightness{
+    filter: brightness(.6);
+}
+
+.spin-active{
+    filter: brightness(1) !important;
+}

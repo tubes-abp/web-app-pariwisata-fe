@@ -1,0 +1,25 @@
+.o-cashier-data-transaction-form {
+  .ant-picker {
+    width: 100%;
+  }
+  .ant-input-number {
+    width: 100%;
+  }
+  &__items{
+    h1 {
+      font-size: 1.6em;
+    }
+  }
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      font-size: 1.2em;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    h3 {
+      font-size: 1.6em;
+    }
+  }
+}

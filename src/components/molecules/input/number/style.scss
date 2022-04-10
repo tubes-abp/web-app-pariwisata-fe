@@ -1,0 +1,10 @@
+.m-input-number {
+  display: flex;
+  gap: 1em;
+  .ant-input {
+    flex-basis: 60%;
+  }
+  .ant-btn {
+    flex-basis: 20%;
+  }
+}

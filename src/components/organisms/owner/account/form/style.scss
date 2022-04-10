@@ -1,0 +1,11 @@
+.o-owner-account-form {
+  margin-top: 2em;
+  width: 100%;
+  &__center {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .ant-picker {
+    width: 100%;
+  }
+}

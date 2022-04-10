@@ -1,0 +1,35 @@
+.o-widget-list {  
+  font-size: 10px;
+  &__header {
+    margin-bottom: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-title {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      .anticon {
+        font-size: 2em;
+      }
+      h3 {
+        font-size: 2em;
+        margin-bottom: 0;
+      }
+    }
+    &-action {
+      &-filter {
+        display: flex;
+        align-items: center;        
+        p { 
+          font-size: 1.4em; 
+          margin: 0 0.5em 0 0;
+        }
+      }
+    }
+  }
+  .text-danger {
+    margin-bottom: 0;
+    color: red;
+  }
+}

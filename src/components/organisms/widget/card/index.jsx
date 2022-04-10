@@ -1,5 +1,5 @@
 import React from 'react'
-import MoleculesButton from '../../../molecules/Button'
+import MoleculesButton from '../../../molecules/button'
 
 const OrganismsWidgetCard = () => {
   return (

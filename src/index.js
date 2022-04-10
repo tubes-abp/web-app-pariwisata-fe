@@ -2,17 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
 
 // COMPONENT & OTHER
-import "assets/scss/index.scss"
+import "./assets/scss/index.scss"
+import 'antd/dist/antd.css';
 
 // REDUX
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers';
-import Main from './base/Main';
+import Main from './base/main';
+import * as defaults from "./helper/defaults"
 
 // SET REDUX STORE
 const store = createStore(
@@ -21,7 +22,7 @@ const store = createStore(
 )
 
 // SET DEFAULT AXIOS
-axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
+defaults.setAxios();
 
 
 ReactDOM.render(

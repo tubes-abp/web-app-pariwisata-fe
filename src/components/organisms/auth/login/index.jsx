@@ -1,15 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 
 import './style.scss'
 
-const OrganismsAuthLogin = ({ handleLogin }) => {
+const OrganismsAuthLogin = ({ isOwner, handleLogin }) => {
   const [form] = Form.useForm();
 
   return (
     <div className="o-login-form">
       <div className="o-login-form__title">
-        <h1>Masuk</h1>
+        <h1>Login { isOwner? 'Owner':'Cashier' }</h1>
         <h3>Managemen dan Monitoring Pariwisata dengan mudah dan cepat.</h3>
         <p>Silakan masukkan username dan password yang sudah terdaftar untuk menikmati layanan.</p>
       </div>
@@ -59,6 +60,16 @@ const OrganismsAuthLogin = ({ handleLogin }) => {
           )}
         </Form.Item>        
       </Form>
+      <div className="o-login-form__link">
+        {
+          isOwner &&
+          <div>
+            <p>Belum Memiliki Akun?</p>
+            <Link to="/">Daftar Disini</Link>
+          </div>
+        }
+        <Link to={`/login/${isOwner?'cashier':'owner'}`}>Login As {isOwner? 'Cashier': 'Owner'}</Link>
+      </div>
     </div>
   )
 }

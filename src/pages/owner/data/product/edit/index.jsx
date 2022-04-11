@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { Tabs } from 'antd';
 
+import { get_data, update_data, update_img_product } from '../../../../../redux/actions/main';
 import OrganismsOwnerDataProductForm from '../../../../../components/organisms/owner/data/product/form';
+import OrganismsWidgetUploadImage from '../../../../../components/organisms/widget/uploadImage';
 import MoleculesGoBack from '../../../../../components/molecules/goBack';
-import { get_data, update_data } from '../../../../../redux/actions/main';
 import LayoutsCms from '../../../../../layouts/cms';
 
 import './style.scss'
 
-const OwnerDataProductEdit = () => {  
+const OwnerDataProductEdit = () => {
+  const { TabPane } = Tabs;
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
 
   const activeMenu = {
-    key: 'data-cashier',
+    key: 'data-product',
     openKey: 'data',
   };
   const breadcrumb = [
@@ -44,6 +47,9 @@ const OwnerDataProductEdit = () => {
       ...product,
     },
   };
+  const initialUploadData= {
+    url: product?.image_url
+  }
 
   const goBack = () => {
     history.push('/owner/data/product');
@@ -56,16 +62,34 @@ const OwnerDataProductEdit = () => {
     console.log(dataEdit);
     dispatch(update_data(`/products/${id}`, dataEdit, history, '/owner/data/product'));
   };
+  const handleEditPic = (img) => {
+    const dataUpload = {
+      img
+    }
+    console.log(dataUpload)
+    dispatch(update_img_product(id, dataUpload, history));
+  };
+
 
   return (    
     <LayoutsCms activeMenu={activeMenu} breadcrumb={breadcrumb} >
       <div className="o-owner-data-product-edit">
-        <MoleculesGoBack title={`${initialFormData.title} Admin`} goBack={goBack} />        
-        <OrganismsOwnerDataProductForm
-          goBack={goBack}
-          initialFormData={initialFormData}
-          handleSubmit={(values) => handleEdit(values)} 
-        />
+        <MoleculesGoBack title={`${initialFormData.title} Product`} goBack={goBack} />        
+        <Tabs defaultActiveKey="1" >
+          <TabPane tab="Informasi Pribadi" key="1">
+            <OrganismsOwnerDataProductForm
+              goBack={goBack}
+              initialFormData={initialFormData}
+              handleSubmit={(values) => handleEdit(values)} 
+            />
+          </TabPane>
+          <TabPane tab="Change Photo" key="2">
+            <OrganismsWidgetUploadImage
+              initialUploadData={initialUploadData}
+              handleSubmit={(values) => handleEditPic(values)}
+            />
+          </TabPane>
+        </Tabs>
       </div>
     </LayoutsCms>
   )

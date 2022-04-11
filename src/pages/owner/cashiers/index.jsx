@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Space, Modal } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import { 
   ExclamationCircleOutlined,
@@ -19,8 +19,8 @@ const OwnerCashiers = () => {
   const { confirm } = Modal;
   const dispatch = useDispatch();
   const history = useHistory();
-  // const search = useLocation().search;
-  // const name = new URLSearchParams(search).get('name');
+  const search = useLocation().search;
+  const keyQuery = new URLSearchParams(search).get('key');
 
   const [initialCashiers, setInitialCashiers] = useState()
 
@@ -47,65 +47,34 @@ const OwnerCashiers = () => {
       label: 'Cashiers',
       url: '/owner/data/cashiers',
     },
-  ];  
-  
-  // useEffect(() => {
-  //   setInitialPatientList([
-  //     {
-  //       key: 1,
-  //       name: "Syafiq",
-  //       email: "fiq@gmail.com",
-  //       birthday: "2001-01-10",
-  //       phone: "081231312313",        
-  //     },      
-  //     {
-  //       key: 2,
-  //       name: "Syafiq",
-  //       email: "fiq@gmail.com",
-  //       birthday: "2001-01-10",
-  //       phone: "081231312313",        
-  //     },      
-  //     {
-  //       key: 3,
-  //       name: "Syafiq",
-  //       email: "fiq@gmail.com",
-  //       birthday: "2001-01-10",
-  //       phone: "081231312313",        
-  //     },      
-  //   ])
-  // }, []);
+  ];
 
   useEffect(() => {
     dispatch(get_data('/cashiers', 'cashiers'));    
   }, [dispatch]);
 
   const { cashiers } = useSelector(state => state.main);
-  useEffect(() => {
-    let modifyData = cashiers.map((dt) => ({
-      ...dt,
-      birthday: format(new Date(dt.birthday), 'dd MMMM yyyy'),
-    }))
-    setInitialCashiers(modifyData);
-  }, [cashiers]);
-  // useEffect(() => {    
-  //   if(patientList.length === 0 && name) {
-  //     dispatch(get_data('patients', 'patient_list'));
-  //   } else {
-  //     let modifyData = patientList.map((dt) => ({
-  //       ...dt,
-  //       birthDate: format(new Date(dt.birthDate), 'dd MMMM yyyy'),
-  //       gender: dt.gender === 'L'? 'Laki-Laki': 'Perempuan',
-  //     }))
-  //     if(name) {
-  //       setInitialPatientList(modifyData?.filter((dt) => dt.name.includes(name)));
-  //     } else {
-  //       setInitialPatientList(modifyData);
-  //     }
-  //   }
-  // }, [dispatch, name, patientList]);
+  useEffect(() => {    
+    if(cashiers.length === 0 && keyQuery) {
+      dispatch(get_data('/cashiers', 'cashiers'));
+    } else {
+      console.log("map:", cashiers)
+      let modifyData = cashiers.map((dt) => ({
+        ...dt,
+        birthday: format(new Date(dt.birthday), 'dd MMMM yyyy'),
+      }))
+      if(keyQuery) {
+        setInitialCashiers(modifyData.filter(
+          (dt) => dt.name.toLowerCase().includes(keyQuery.toLowerCase())
+        ));
+      } else {
+        setInitialCashiers(modifyData);
+      }
+    }
+  }, [dispatch, cashiers, keyQuery]);
 
   const handleSearch = (key) => {
-    history.push(`/admin/data/patient?name=${key}`);
+    history.push(`/owner/cashiers?key=${key}`);
   }
   
   const listCashier = {

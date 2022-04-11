@@ -25,4 +25,22 @@
   .btn-form {
     margin-top: 4em;
   }
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4em;
+    div {
+      gap: 0.4em;    
+      display: flex;
+      align-items: center;
+    }
+    p {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+    a:last-child {
+      text-align: right;
+    }
+  }
 }

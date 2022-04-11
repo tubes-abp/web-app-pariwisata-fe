@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import MoleculesGoBack from '../../../../components/molecules/goBack';
 import OrganismsWidgetFormChangePassword from '../../../../components/organisms/widget/form/changePassword';
-import { get_data, update_data } from '../../../../redux/actions/main';
+import { change_password, get_data, update_data } from '../../../../redux/actions/main';
 import OrganismsOwnerCashierForm from '../../../../components/organisms/owner/cashier/form';
 import LayoutsCms from '../../../../layouts/cms';
 
@@ -57,24 +57,20 @@ const OwnerCashierEdit = () => {
     delete dataEdit['email']    
     dataEdit = {
       ...dataEdit,
-      password: "1234",
       birthday: dataEdit.birthday.format('YYYY-MM-DD'),
     }    
     console.log(dataEdit);
     dispatch(update_data(`/cashiers/${id}`, dataEdit, history, '/owner/cashiers'));
   };
-  const handleEditPassword = (dataEdit) => {    
-    dataEdit = {
-      ...dataEdit,
-      id: parseInt(id),
-    }    
-    dispatch(update_data(`admins/password`, dataEdit, history, '/admin/data/admin'));
+  const handleEditPassword = (dataEdit) => {
+    console.log("role:", dataEdit)
+    dispatch(change_password(`/cashiers/${id}/change-password`, dataEdit, history, "/owner/cashiers"));
   };
 
   return (    
     <LayoutsCms activeMenu={activeMenu} breadcrumb={breadcrumb} >
       <div className="o-owner-cashier-edit">
-        <MoleculesGoBack title={`${initialFormData.title} Admin`} goBack={goBack} />        
+        <MoleculesGoBack title={`${initialFormData.title} Cashier`} goBack={goBack} />        
         <Tabs defaultActiveKey="1" >
           <TabPane tab="Informasi Pribadi" key="1">
             <OrganismsOwnerCashierForm 

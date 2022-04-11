@@ -27,7 +27,9 @@ const OrganismsCmsSidebar = (props) => {
       {
         true &&
         <div className="o-cms-sidebar__profile">
-          <Avatar size={45} src=""/>
+          <Avatar size={45}>
+            { props.profileData?.name[0] }
+          </Avatar>
           <div className="o-cms-sidebar__profile-info">
             <h4>{ props.profileData?.name }</h4>
             <p>{ props.role }</p>

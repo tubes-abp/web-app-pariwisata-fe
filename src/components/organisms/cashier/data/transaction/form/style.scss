@@ -6,9 +6,15 @@
     width: 100%;
   }
   &__items{
+    margin-bottom: 1em;
     h1 {
       font-size: 1.6em;
     }
+    &-product {
+      padding-right: 1em;
+      height: 400px;
+      overflow-y: auto;      
+    }    
   }
   &__total {
     display: flex;

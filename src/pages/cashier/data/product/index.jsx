@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OrganismsWidgetList from '../../../../components/organisms/widget/list';
 import LayoutsCms from '../../../../layouts/cms';
@@ -10,8 +10,8 @@ import { get_data } from '../../../../redux/actions/main';
 const CashierDataProduct = () => {  
   const dispatch = useDispatch();
   const history = useHistory();
-  // const search = useLocation().search;
-  // const name = new URLSearchParams(search).get('name');
+  const search = useLocation().search;
+  const keyQuery = new URLSearchParams(search).get('key');
 
   const [initialProducts, setInitialProducts] = useState()
 
@@ -40,14 +40,25 @@ const CashierDataProduct = () => {
 
   const { products } = useSelector(state => state.main);
   useEffect(() => {
-    // let modifyData = products.map((dt) => ({
-    //   ...dt,
-    // }))
-    setInitialProducts(products);
-  }, [products]);
+    if(products.length === 0 && keyQuery) {
+      dispatch(get_data('/products', 'products'));
+    } else {
+      let modifyData = products.map((dt) => ({
+        ...dt,
+        price: "Rp"+new Intl.NumberFormat().format(dt['price'])
+      }))
+      if(keyQuery) {
+        setInitialProducts(modifyData.filter(
+          (dt) => dt.name.toLowerCase().includes(keyQuery.toLowerCase())
+        ));
+      } else {
+        setInitialProducts(modifyData);
+      }
+    }
+  }, [dispatch, products, keyQuery]);
 
   const handleSearch = (key) => {
-    history.push(`/admin/data/patient?name=${key}`);
+    history.push(`/cashier/data/product?key=${key}`);
   }
   
   const listPatient = {

@@ -2,8 +2,9 @@ import React from 'react'
 import { Form, Input, Button, DatePicker } from 'antd';
 
 import './style.scss'
+import { Link } from 'react-router-dom';
 
-const OrganismsAuthRegister = ({ handleLogin }) => {
+const OrganismsAuthRegister = ({ handleRegister }) => {
   const [form] = Form.useForm();
   const dateFormat = "YYYY-MM-DD";
 
@@ -17,7 +18,7 @@ const OrganismsAuthRegister = ({ handleLogin }) => {
       <Form 
         form={form} 
         layout="vertical"         
-        onFinish={handleLogin}
+        onFinish={handleRegister}
       >
         <Form.Item
           label="Informasi Pribadi"
@@ -66,29 +67,41 @@ const OrganismsAuthRegister = ({ handleLogin }) => {
           <Input size="large" placeholder='Alamat Email' />
         </Form.Item>
         <Form.Item
-          label="Password "
           name="password"
+          label="Password"
           required={false}
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: 'Please input your password!',
             },
           ]}
+          hasFeedback
         >
-          <Input.Password size="large" placeholder='Buat Password' />
+          <Input.Password size="large" placeholder="Massukan Password"  />
         </Form.Item>
         <Form.Item
-          name="password"
+          name="confirm"
           required={false}
+          dependencies={['password']}
+          hasFeedback
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: 'Please confirm your password!',
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+
+                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              },
+            }),
           ]}
         >
-          <Input.Password size="large" placeholder='Ulangi Password' />
+          <Input.Password size="large" placeholder="Ulangi Password" />
         </Form.Item>
         <Form.Item shouldUpdate className="btn-form">
           {() => (              
@@ -103,6 +116,10 @@ const OrganismsAuthRegister = ({ handleLogin }) => {
           )}
         </Form.Item>        
       </Form>
+      <div className="o-register-form__link">
+        <p>Sudah Memiliki Akun?</p>
+        <Link to="/login/owner">Masuk Disini</Link>
+      </div>
     </div>
   )
 }

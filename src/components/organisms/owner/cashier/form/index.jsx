@@ -98,7 +98,7 @@ const OrganismsOwnerCashierForm = ({ goBack, initialFormData, handleSubmit }) =>
                 htmlType="submit"
                 icon={<PlusOutlined />}
               >
-                { initialFormData.title } Admin
+                { initialFormData.title } Cashier
               </Button>
             )}
           </Form.Item>

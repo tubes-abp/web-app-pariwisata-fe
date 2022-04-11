@@ -1,6 +1,5 @@
 import React from 'react'
 import { Row, Col, Space, Button } from 'antd';
-import exImg from '../../../../../assets/images/no-image-available.png'
 import { PlusOutlined } from '@ant-design/icons';
 
 
@@ -12,7 +11,7 @@ const OrganismsWidgetCardProduct = ({data, addProduct}) => {
       <Space direction="vertical" size="middle">
         <Row gutter={16} >
           <Col span={8}>
-            <img src={exImg} alt="" />        
+            <img src={"http://localhost:8000/storage/"+data.image_url} alt="" />        
           </Col>
           <Col span={16}>          
             <p>{ data.type }</p>
@@ -24,12 +23,12 @@ const OrganismsWidgetCardProduct = ({data, addProduct}) => {
             <p>Stock</p>
             <h2>{ data.stock }</h2>
           </Col>
-          <Col span={8}>
+          <Col span={11}>
             <p>Harga</p>
-            <h2>{ data.price }</h2>
+            <h2>{ "Rp"+new Intl.NumberFormat().format(data.price) }</h2>
           </Col>
-          <Col span={10}>
-            <Button icon={<PlusOutlined />} onClick={() => addProduct(data)} >Tambahkan Product</Button>
+          <Col span={7}>
+            <Button icon={<PlusOutlined />} onClick={() => addProduct(data)} >Tambah</Button>
           </Col>
         </Row>
       </Space>

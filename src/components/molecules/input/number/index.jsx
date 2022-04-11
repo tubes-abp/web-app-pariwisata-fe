@@ -1,15 +1,21 @@
 import React from 'react'
-import { Button, Input } from 'antd';
+import { Button, InputNumber } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 import './style.scss';
 
-const MoleculesInputNumber = ({ value, handleQuantity }) => {
+const MoleculesInputNumber = ({ numberVal, stockMax, handleQuantity }) => {
   return (
     <div className="m-input-number">
-      <Button icon={<MinusOutlined />} onClick={() => handleQuantity(value - 1)} />
-      <Input value={value} />
-      <Button icon={<PlusOutlined />} onClick={() => handleQuantity(value + 1)} />
+      <Button icon={<MinusOutlined />} onClick={() => handleQuantity(numberVal - 1)} />
+      <InputNumber 
+        min={1} 
+        max={stockMax} 
+        value={numberVal} 
+        controls={false}
+        onChange={handleQuantity}
+      />
+      <Button icon={<PlusOutlined />} onClick={() => handleQuantity(numberVal + 1)} />
     </div>
   )
 }

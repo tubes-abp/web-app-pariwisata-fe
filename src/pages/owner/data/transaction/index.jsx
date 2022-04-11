@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import { Space, Modal } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { 
   ExclamationCircleOutlined, 
-  FolderOutlined,
   DeleteOutlined  
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,8 +16,8 @@ const OwnerDataTransaction = () => {
   const { confirm } = Modal;
   const dispatch = useDispatch();
   const history = useHistory();
-  // const search = useLocation().search;
-  // const name = new URLSearchParams(search).get('name');
+  const search = useLocation().search;
+  const keyQuery = new URLSearchParams(search).get('key');
 
   const [initialTransactionList, setInitialTransactionList] = useState()
 
@@ -33,7 +31,7 @@ const OwnerDataTransaction = () => {
       icon: <ExclamationCircleOutlined />,
       content: 'You can undo this change',
       onOk() {
-        dispatch(delete_data(`transactions`, id, 'transactions'));
+        dispatch(delete_data(`/transactions`, id, 'transactions'));
       },
     });
   }
@@ -50,21 +48,7 @@ const OwnerDataTransaction = () => {
       label: 'Product',
       url: '/owner/data/product',
     },
-  ];  
-  
-  // useEffect(() => {
-  //   setInitialPatientList([
-  //     {
-  //       key: 1,
-  //       cust_name: "Angga Wira",
-  //       cashier_name: "Putri KW",
-  //       product: "Tiket Wahana",
-  //       quantity: 2,
-  //       total_price: 50000,
-  //       notes: "Beli nih",
-  //     },
-  //   ])
-  // }, []);
+  ];
 
   useEffect(() => {
     dispatch(get_data('/transactions', 'transactions'));    
@@ -72,40 +56,27 @@ const OwnerDataTransaction = () => {
 
   const { transactions } = useSelector(state => state.main);
   useEffect(() => {
-    let modifyData = transactions.map((dt) => ({
-      ...dt,
-      cashier_name: dt.cashier.name,
-      product: dt.product.name,
-    }))
-    setInitialTransactionList(modifyData);
-  }, [transactions]);
-
-  // useEffect(() => {
-  //   if(!name) {
-  //     dispatch(get_data('patients', 'patient_list'));
-  //   }
-  // }, [dispatch, name]);
-
-  // const patientList = useSelector(state => state.admin?.patient_list)  
-  // useEffect(() => {    
-  //   if(patientList.length === 0 && name) {
-  //     dispatch(get_data('patients', 'patient_list'));
-  //   } else {
-  //     let modifyData = patientList.map((dt) => ({
-  //       ...dt,
-  //       birthDate: format(new Date(dt.birthDate), 'dd MMMM yyyy'),
-  //       gender: dt.gender === 'L'? 'Laki-Laki': 'Perempuan',
-  //     }))
-  //     if(name) {
-  //       setInitialPatientList(modifyData?.filter((dt) => dt.name.includes(name)));
-  //     } else {
-  //       setInitialPatientList(modifyData);
-  //     }
-  //   }
-  // }, [dispatch, name, patientList]);
+    if(transactions.length === 0 && keyQuery) {
+      dispatch(get_data('/transactions', 'transactions'));
+    } else {
+      let modifyData = transactions.map((dt) => ({
+        ...dt,
+        cashier_name: dt.cashier.name,
+        product: dt.product.name,
+        purchase_amount: "Rp"+new Intl.NumberFormat().format(dt['purchase amount'])
+      }))
+      if(keyQuery) {
+        setInitialTransactionList(modifyData.filter(
+          (dt) => dt.buyer_name.toLowerCase().includes(keyQuery.toLowerCase())
+        ));
+      } else {
+        setInitialTransactionList(modifyData);
+      }
+    }    
+  }, [dispatch, transactions, keyQuery]);
 
   const handleSearch = (key) => {
-    history.push(`/admin/data/patient?name=${key}`);
+    history.push(`/owner/data/transaction?key=${key}`);
   }
   
   const listPatient = {
@@ -133,8 +104,8 @@ const OwnerDataTransaction = () => {
       },
       {
         title: 'Total Price',
-        dataIndex: 'purchase amount',
-        key: 'purchase amount',
+        dataIndex: 'purchase_amount',
+        key: 'purchase_amount',
       },
       {
         title: 'Action',
@@ -142,9 +113,6 @@ const OwnerDataTransaction = () => {
         render: (text, record) => {
           return (
             <Space size="middle">
-              <Link to={`/admin/data/patient/detail/${record.key}`}>
-                <FolderOutlined />
-              </Link>
               <p 
                 className="text-danger"
                 onClick={() => askToDelete(record.key)}

@@ -5,7 +5,7 @@ import OrganismsCashierDataTransactionItem from '../item';
 
 import './style.scss'
 
-const OrganismsCashierDataTransactionForm = ({ goBack, products, initialFormData, handleQuantity, handleSubmit }) => {  
+const OrganismsCashierDataTransactionForm = ({ goBack, products, initialFormData, handleQuantity, handleDeleteItem, handleSubmit }) => {  
   const [form] = Form.useForm();
   const [totalPrice, setTotalPrice] = useState(0)
   useEffect(() => form.resetFields(), [initialFormData, form]);
@@ -25,7 +25,22 @@ const OrganismsCashierDataTransactionForm = ({ goBack, products, initialFormData
         layout="vertical" 
         initialValues={initialFormData.data}
         onFinish={handleSubmit}
-      >            
+      >        
+        <div className="o-cashier-data-transaction-form__items">
+          <h1>Items</h1>
+          <div className="o-cashier-data-transaction-form__items-product">
+            {
+              products.map((product, idx) => (
+                <OrganismsCashierDataTransactionItem 
+                  key={idx} 
+                  data={product} 
+                  handleQuantity={(quantity) => handleQuantity(quantity, product.id)} 
+                  handleDeleteItem={handleDeleteItem}
+                />
+              ))
+            }
+          </div>          
+        </div>
         <Form.Item
           label="Buyer Name"
           name="buyer_name"
@@ -39,19 +54,9 @@ const OrganismsCashierDataTransactionForm = ({ goBack, products, initialFormData
         >
           <Input />
         </Form.Item>
-        <div className="o-cashier-data-transaction-form__items">
-          <h1>Items</h1>
-          <div className="o-cashier-data-transaction-form__items-product">
-            {
-              products.map((product) => (
-                <OrganismsCashierDataTransactionItem data={product} handleQuantity={(quantity) => handleQuantity(quantity, product.id)} />
-              ))
-            }
-          </div>          
-        </div>
         <div className="o-cashier-data-transaction-form__total">
           <p>Total Harga</p>
-          <h3>{totalPrice}</h3>
+          <h3>{ "Rp"+new Intl.NumberFormat().format(totalPrice)}</h3>
         </div>
         <Space size="middle">
           <Form.Item shouldUpdate>

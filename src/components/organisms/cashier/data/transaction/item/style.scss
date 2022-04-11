@@ -7,8 +7,16 @@
     margin-bottom: 0.5em;
     font-weight: bold;
   }
-  &__secondary-text {
-    font-weight: normal;
-    color: rgba(0, 0, 0, 0.45);
+  &__header-text {
+    display: flex;
+    justify-content: space-between;
+    p:first-child {      
+      color: rgba(0, 0, 0, 0.45);
+    } 
+    p:last-child {
+      color: red;
+      font-weight: 400;
+      cursor: pointer;
+    }
   }
 }

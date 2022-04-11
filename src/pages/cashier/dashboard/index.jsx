@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-// import { format } from 'date-fns';
 
+import { get_data } from '../../../redux/actions/main'; 
 import OrganismsOwnerDashboardHighlight from '../../../components/organisms/owner/dashboard/highlight'
 import OrganismsOwnerDashboardCardGroup from '../../../components/organisms/owner/dashboard/cardGroup'
 import LayoutsCms from '../../../layouts/cms'
-// import { get_data } from '../../../redux/actions/admin'
 import './style.scss'
 
 const CashierDashboard = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [highlightData, setHighlightData] = useState([])
   const breadcrumb = [
@@ -30,56 +30,43 @@ const CashierDashboard = () => {
     {
       title: "Product Data",
       desc: "See list of product in this UMKM",
-      url: '/owner/data/product',
+      url: '/cashier/data/product',
       img_url: '',
     },
     {
       title: "Transaction Data",
       desc: "See list of transaction in this UMKM",
-      url: '/owner/data/transaction',
-      img_url: '',
-    },
-    {
-      title: "Manage Cashier",
-      desc: "See list cashier to create or edit or delete data",
-      url: '/owner/cashier',
+      url: '/cashier/data/transaction',
       img_url: '',
     },
   ];
   
-  // const dispatch = useDispatch()  
-  // useEffect(() => {    
-  //   dispatch(get_data("patients", "patient_list"))
-  //   dispatch(get_data("doctors", "doctor_list"))
-  //   dispatch(get_data("outpatients", "outpatient_list"))
-  //   dispatch(get_data("nurses", "nurses_list"))
-  //   dispatch(get_data("work-schedules", "schedule_list"))
-  //   // eslint-disable-next-line
-  // }, [])  
-  // const { patient_list, doctor_list, outpatient_list, nurses_list, schedule_list } = useSelector(state => state.admin)  
+  useEffect(() => {    
+    dispatch(get_data("/products", "products"));
+    dispatch(get_data('/transactions', 'transactions'));
+    // eslint-disable-next-line
+  }, [])
+  const { products, transactions } = useSelector(state => state.main)  
   
   useEffect(() => {
-    // let today = schedule_list.filter(dt => dt.date === format(new Date(Date.now()), 'yyyy-MM-dd'))
-    // let outpatientToday = outpatient_list.filter(dt => dt.date === format(new Date(Date.now()), 'yyyy-MM-dd'))
-    // let availDoctor = today.map(dt => dt.doctor.name).filter((value, index, self) => self.indexOf(value) === index);
-    // let availNurse = today.map(dt => dt.nurse.name).filter((value, index, self) => self.indexOf(value) === index);
-    
+    const sum = transactions.map(data => data['purchase amount']).reduce((a, b) => a + b, 0);
+    const currency = new Intl.NumberFormat().format(sum);
+    console.log('sum', sum)
     setHighlightData([
       {
         title: "Total Product",
-        total: 300,
+        total: products.length,
       },
       {
         title: "Total Transaction",
-        total: 300,
-        available: 10,
+        total: transactions.length,
       },
       {
-        title: "Total Categories",
-        total: 200,
+        title: "Total Income",
+        total: "Rp"+currency,
       },
     ]);
-  }, []);
+  }, [products, transactions]);
 
   const goToUrl = (url) => {
     history.push(url);

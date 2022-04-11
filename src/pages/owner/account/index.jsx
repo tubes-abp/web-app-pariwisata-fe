@@ -37,7 +37,7 @@ const OwnerAccount = () => {
   ];
 
   useEffect(() => {
-    dispatch(get_data(`/owners`, 'owner'));
+    dispatch(get_data(`/owners/current`, 'owner'));
   }, [dispatch, id]);
   const { owner } = useSelector(state => state.main)
 
@@ -59,14 +59,14 @@ const OwnerAccount = () => {
     }    
     console.log(dataEdit);
     dispatch(update_data(`/owners`, dataEdit, history, '/owner/account'));
-    dispatch(get_data(`/owners`, 'owner'));
+    dispatch(get_data(`/owners/current`, 'owner'));
   };
   const handleEditPassword = (dataEdit) => {    
     dataEdit = {
       ...dataEdit,
     }    
     console.log(dataEdit);
-    dispatch(change_password(`/owners/change-password`, dataEdit, history));
+    dispatch(change_password(`/owners/change-password`, dataEdit, history, "/login/owner"));
   };
 
   return (    

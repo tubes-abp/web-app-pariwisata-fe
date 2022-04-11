@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Space, Modal } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { 
-  ExclamationCircleOutlined, 
-  FolderOutlined, 
+  ExclamationCircleOutlined,
   EditOutlined, 
   DeleteOutlined  
 } from '@ant-design/icons';
@@ -19,8 +18,8 @@ const OwnerDataProduct = () => {
   const { confirm } = Modal;
   const dispatch = useDispatch();
   const history = useHistory();
-  // const search = useLocation().search;
-  // const name = new URLSearchParams(search).get('name');
+  const search = useLocation().search;
+  const keyQuery = new URLSearchParams(search).get('key');
 
   const [initialProducts, setInitialProducts] = useState()
 
@@ -51,39 +50,7 @@ const OwnerDataProduct = () => {
       label: 'Product',
       url: '/owner/data/product',
     },
-  ];  
-  
-  // useEffect(() => {
-  //   setInitialPatientList([
-  //     {
-  //       key: 1,
-  //       name: "Tiket Masuk",
-  //       price: 100000,
-  //       discount: 1000,
-  //       notes: "Tiket masuk buat masuk ke air terjun",
-  //       type: 5,
-  //       stock: 200,
-  //     },
-  //     {
-  //       key: 2,
-  //       name: "Tiket Masuk",
-  //       price: 100000,
-  //       discount: 1000,
-  //       notes: "Tiket masuk buat masuk ke air terjun",
-  //       type: 5,
-  //       stock: 200,
-  //     },
-  //     {
-  //       key: 3,
-  //       name: "Tiket Masuk",
-  //       price: 100000,
-  //       discount: 1000,
-  //       notes: "Tiket masuk buat masuk ke air terjun",
-  //       type: 5,
-  //       stock: 200,
-  //     },
-  //   ])
-  // }, []);
+  ];
 
   useEffect(() => {
     dispatch(get_data('/products', 'products'));    
@@ -91,38 +58,25 @@ const OwnerDataProduct = () => {
 
   const { products } = useSelector(state => state.main);
   useEffect(() => {
-    // let modifyData = products.map((dt) => ({
-    //   ...dt,
-    // }))
-    setInitialProducts(products);
-  }, [products]);
-
-  // useEffect(() => {
-  //   if(!name) {
-  //     dispatch(get_data('patients', 'patient_list'));
-  //   }
-  // }, [dispatch, name]);
-
-  // const patientList = useSelector(state => state.admin?.patient_list)  
-  // useEffect(() => {    
-  //   if(patientList.length === 0 && name) {
-  //     dispatch(get_data('patients', 'patient_list'));
-  //   } else {
-  //     let modifyData = patientList.map((dt) => ({
-  //       ...dt,
-  //       birthDate: format(new Date(dt.birthDate), 'dd MMMM yyyy'),
-  //       gender: dt.gender === 'L'? 'Laki-Laki': 'Perempuan',
-  //     }))
-  //     if(name) {
-  //       setInitialPatientList(modifyData?.filter((dt) => dt.name.includes(name)));
-  //     } else {
-  //       setInitialPatientList(modifyData);
-  //     }
-  //   }
-  // }, [dispatch, name, patientList]);
+    if(products.length === 0 && keyQuery) {
+      dispatch(get_data('/products', 'products'));
+    } else {
+      let modifyData = products.map((dt) => ({
+        ...dt,
+        price: "Rp"+new Intl.NumberFormat().format(dt['price'])
+      }))
+      if(keyQuery) {
+        setInitialProducts(modifyData.filter(
+          (dt) => dt.name.toLowerCase().includes(keyQuery.toLowerCase())
+        ));
+      } else {
+        setInitialProducts(modifyData);
+      }
+    }
+  }, [dispatch, products, keyQuery]);  
 
   const handleSearch = (key) => {
-    history.push(`/admin/data/patient?name=${key}`);
+    history.push(`/owner/data/product?key=${key}`);
   }
   
   const listPatient = {
@@ -154,9 +108,6 @@ const OwnerDataProduct = () => {
         render: (text, record) => {
           return (
             <Space size="middle">
-              <Link to={`/owner/data/product/edit/${record.key}`}>
-                <FolderOutlined />
-              </Link>
               <Link to={`/owner/data/product/edit/${record.key}`}>
                 <EditOutlined />
               </Link>

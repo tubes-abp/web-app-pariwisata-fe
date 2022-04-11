@@ -13,7 +13,7 @@ export const put_data = (key, data) => ({
     data
 })
 
-export const auth_login_owner = (role, payload, history) => {
+export const auth_login = (role, payload, history) => {
   return (dispatch) => {
     dispatch(toggle_loader(true));
     axios
@@ -106,15 +106,18 @@ export const post_transaction = (payload, history) => {
   }
 }
 
-export const change_password = (url, payload, history) => {
+export const change_password = (url, payload, history, nextPage) => {
   return (dispatch) => {
     dispatch(toggle_loader(true));
     axios
       .patch(url, payload)
       .then((res) => {
         dispatch(modal_success(res.data?.message));
-        window.localStorage.removeItem("token");
-        history.push("/login/owner");
+        let urlLink = nextPage.split("/")[1];
+        if(urlLink === "login"){
+          window.localStorage.removeItem("token");
+        }
+        history.push(nextPage);
       })
       .catch((err) => {
         console.log(err);
@@ -138,6 +141,27 @@ export const update_data = (url, payload, history, nextPage) => {
       .catch((err) => {
         console.log(err);
         dispatch(error("There are something went wrong"));
+      })
+      .then(() => {
+        dispatch(toggle_loader(false));
+      });
+  }
+}
+
+export const update_img_product = (id, payload, history) => {
+  return (dispatch) => {
+    dispatch(toggle_loader(true));
+    const formData = new FormData();
+    formData.append('img', payload.img);
+    axios
+      .post(`/products/${id}/change-img`, formData)
+      .then((resp) => {
+        history.push('/owner/data/product');
+        dispatch(modal_success(resp.data?.message));
+      })
+      .catch((err) => {      
+        dispatch(error("There are something went wrong"));
+        console.log(err);
       })
       .then(() => {
         dispatch(toggle_loader(false));

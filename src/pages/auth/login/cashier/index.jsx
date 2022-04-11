@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { auth_login_owner } from '../../../../redux/actions/main'
+import { auth_login } from '../../../../redux/actions/main'
 import CoverImg from '../../../../assets/images/login_img.png'
 import OrganismsAuthLogin from '../../../../components/organisms/auth/login'
 
@@ -14,12 +14,12 @@ const LoginCashier = () => {
 
   const handleLogin = (values) => {
     console.log("data: ", values)
-    dispatch(auth_login_owner("cashier", values, history))
+    dispatch(auth_login("cashier", values, history))
   }
   return (
     <div className='p-login-cashier'>
       <div className="p-login-cashier__form">
-        <OrganismsAuthLogin handleLogin={handleLogin} />
+        <OrganismsAuthLogin isOwner={false} handleLogin={handleLogin} />
       </div>
       <div className='p-login-cashier__cover'>
         <img src={CoverImg} alt="" />

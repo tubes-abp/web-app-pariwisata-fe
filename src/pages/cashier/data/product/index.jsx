@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import OrganismsWidgetList from '../../../../components/organisms/widget/list';
+// import OrganismsWidgetList from '../../../../components/organisms/widget/list';
 import LayoutsCms from '../../../../layouts/cms';
 
 import './style.scss'
 import { get_data } from '../../../../redux/actions/main';
+import OrganismsWidgetCardProduct from '../../../../components/organisms/widget/card/product';
 
 const CashierDataProduct = () => {  
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const search = useLocation().search;
   const keyQuery = new URLSearchParams(search).get('key');
 
-  const [initialProducts, setInitialProducts] = useState()
+  const [initialProducts, setInitialProducts] = useState([])
 
   const activeMenu = {
     key: 'data-product',
@@ -45,7 +46,7 @@ const CashierDataProduct = () => {
     } else {
       let modifyData = products.map((dt) => ({
         ...dt,
-        price: "Rp"+new Intl.NumberFormat().format(dt['price'])
+        // price: "Rp"+new Intl.NumberFormat().format(dt['price'])
       }))
       if(keyQuery) {
         setInitialProducts(modifyData.filter(
@@ -57,43 +58,56 @@ const CashierDataProduct = () => {
     }
   }, [dispatch, products, keyQuery]);
 
-  const handleSearch = (key) => {
-    history.push(`/cashier/data/product?key=${key}`);
-  }
+  // const handleSearch = (key) => {
+  //   history.push(`/cashier/data/product?key=${key}`);
+  // }
   
-  const listPatient = {
-    title: "List Product",
-    columns: [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-      },
-      {
-        title: 'Price',
-        dataIndex: 'price',
-        key: 'price',
-      },
-      {
-        title: 'Type',
-        dataIndex: 'type',
-        key: 'type',
-      },
-      {
-        title: 'Stock',
-        dataIndex: 'stock',
-        key: 'stock',
-      },
-    ],
-    data: initialProducts,
-  };
+  // const listPatient = {
+  //   title: "List Product",
+  //   columns: [
+  //     {
+  //       title: 'Name',
+  //       dataIndex: 'name',
+  //       key: 'name',
+  //     },
+  //     {
+  //       title: 'Price',
+  //       dataIndex: 'price',
+  //       key: 'price',
+  //     },
+  //     {
+  //       title: 'Type',
+  //       dataIndex: 'type',
+  //       key: 'type',
+  //     },
+  //     {
+  //       title: 'Stock',
+  //       dataIndex: 'stock',
+  //       key: 'stock',
+  //     },
+  //   ],
+  //   data: initialProducts,
+  // };
+  
   return (
     <LayoutsCms activeMenu={activeMenu} breadcrumb={breadcrumb}>
       <div className="p-cashier-data-product">
-        <OrganismsWidgetList 
+        <h1>List Product</h1>
+        {/* <OrganismsWidgetList 
           list={listPatient}
           handleSearch={handleSearch}
-        />
+        /> */}
+        <div className="p-cashier-data-product__list">
+          {
+            initialProducts.map((product) => (
+              <div className="p-cashier-data-product__list-item">
+                <OrganismsWidgetCardProduct
+                  data={product}
+                />
+              </div>
+            ))
+          }
+        </div>
       </div>      
     </LayoutsCms>
   )

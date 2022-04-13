@@ -26,16 +26,20 @@ const CashierDataTransactionAdd = () => {
   };
   const breadcrumb = [
     {
-      label: 'Owner',
-      url: '/owner/dashboard',
+      label: 'Cashier',
+      url: '/cashier/dashboard',
     },
     {
-      label: 'Cashier',
-      url: '/owner/cashiers',
+      label: 'Data',
+      url: '/cashier/data/transaction',
+    },
+    {
+      label: 'Transaction',
+      url: '/cashier/data/transaction/add',
     },
     {
       label: 'Add',
-      url: '/owner/cashier/add',
+      url: '/cashier/data/transaction/add',
     },
   ];
 

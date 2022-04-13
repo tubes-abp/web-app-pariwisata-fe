@@ -45,8 +45,8 @@ const OwnerDataTransaction = () => {
       url: '/owner/data/patient',
     },
     {
-      label: 'Product',
-      url: '/owner/data/product',
+      label: 'Transaction',
+      url: '/owner/data/transaction',
     },
   ];
 

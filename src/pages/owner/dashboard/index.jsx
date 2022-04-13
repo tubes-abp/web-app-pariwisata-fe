@@ -69,7 +69,7 @@ const OwnerDashboard = () => {
         total: transactions.length,
       },
       {
-        title: "Total Pendapatan",
+        title: "Total Income",
         total: "Rp"+currency,
       },
     ]);

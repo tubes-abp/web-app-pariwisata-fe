@@ -1,4 +1,19 @@
 .p-cashier-data-product {
   background-color: white;
   padding: 3em;
+  h1 {
+    font-size: 2em;
+    margin-bottom: 1.5em;
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 50em;
+    padding-right: 2em;
+    overflow-y: auto;
+    &-item {
+      flex-basis: 48%;
+    }
+  }
 }

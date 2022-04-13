@@ -27,12 +27,8 @@ const OwnerAccount = () => {
       url: '/owner/dashboard',
     },
     {
-      label: 'Cashier',
-      url: '/owner/cashiers',
-    },
-    {
-      label: 'Edit',
-      url: '/owner/cashier/edit',
+      label: 'Account',
+      url: '/owner/account',
     },
   ];
 

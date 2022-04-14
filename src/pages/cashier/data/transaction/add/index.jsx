@@ -71,7 +71,6 @@ const CashierDataTransactionAdd = () => {
     history.push('/cashier/data/transaction');
   }  
   const addProduct = (data) => {
-    console.log(data)
     setTransactionNew([
       ...transactionNew,
       {
@@ -81,30 +80,23 @@ const CashierDataTransactionAdd = () => {
     ])
   }
   const handleQuantity = (quantity, id) => {
-    console.log("quan", quantity, id)    
     let newData = transactionNew.map((dt) => (
       dt.id === id && dt.stock >= quantity && quantity > 0 ? {
         ...dt,
         quantity
       } : dt
-    ))
-    console.log("modif", newData)
+    ))    
     setTransactionNew(newData)
   }
-  const handleDeleteItem = (id) => {
-    console.log("quan", id)
-    let newData = transactionNew.filter((data) => data.id !== id)
-    console.log("modif", newData)
-    setTransactionNew(newData)
+  const handleDeleteItem = (id) => {    
+    let newData = transactionNew.filter((data) => data.id !== id);
+    setTransactionNew(newData);
   }
   const handleSearch = (key) => {
-    console.log(key);
-    history.push(`/cashier/data/transaction/add?product=${key}`)
+    history.push(`/cashier/data/transaction/add?product=${key}`);
   }
 
-  const handleCreate = (data) => {    
-    console.log(data);
-    console.log(transactionNew);
+  const handleCreate = (data) => {
     const transactions = transactionNew.map((product) => (
       {
         buyer_name: data.buyer_name,

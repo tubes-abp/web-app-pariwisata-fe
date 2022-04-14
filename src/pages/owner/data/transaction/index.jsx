@@ -27,7 +27,7 @@ const OwnerDataTransaction = () => {
   };
   const askToDelete = (id) => {
     confirm({
-      title: 'Are you sure delete this patient?',
+      title: 'Are you sure delete this transaction?',
       icon: <ExclamationCircleOutlined />,
       content: 'You can undo this change',
       onOk() {

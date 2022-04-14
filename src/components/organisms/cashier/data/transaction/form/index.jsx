@@ -14,7 +14,7 @@ const OrganismsCashierDataTransactionForm = ({ goBack, products, initialFormData
     products.forEach((product) => {
       total += (parseInt(product.price) * product.quantity)      
     });
-    console.log("total", total)
+    
     setTotalPrice(total)
   }, [products])
   

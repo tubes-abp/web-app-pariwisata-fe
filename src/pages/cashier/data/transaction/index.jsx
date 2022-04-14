@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Space, Modal } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
-import { 
-  ExclamationCircleOutlined,
-  DeleteOutlined  
-} from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import OrganismsWidgetList from '../../../../components/organisms/widget/list';
 import LayoutsCms from '../../../../layouts/cms';
 
 import './style.scss'
-import { delete_data, get_data } from '../../../../redux/actions/main';
+import { get_data } from '../../../../redux/actions/main';
 
 const CashierDataTransaction = () => {
-  const { confirm } = Modal;
   const dispatch = useDispatch();
   const history = useHistory();
   const search = useLocation().search;
@@ -25,16 +19,6 @@ const CashierDataTransaction = () => {
     key: 'data-transaction',
     openKey: 'data',
   };
-  const askToDelete = (id) => {
-    confirm({
-      title: 'Are you sure delete this transaction?',
-      icon: <ExclamationCircleOutlined />,
-      content: 'You can undo this change',
-      onOk() {
-        dispatch(delete_data(`/transactions`, id, 'transactions'));
-      },
-    });
-  }
   const breadcrumb = [
     {
       label: 'Cashier',
@@ -106,22 +90,6 @@ const CashierDataTransaction = () => {
         title: 'Total Price',
         dataIndex: 'purchase_amount',
         key: 'purchase_amount',
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => {
-          return (
-            <Space size="middle">
-              <p 
-                className="text-danger"
-                onClick={() => askToDelete(record.key)}
-              >
-                <DeleteOutlined />
-              </p>
-            </Space>
-          )
-        },
       },
     ],
     data: initialTransactionList,

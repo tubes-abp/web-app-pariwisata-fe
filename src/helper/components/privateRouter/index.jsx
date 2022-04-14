@@ -10,7 +10,6 @@ const PrivateRoute = (props) => {
 
   const path = props.path.split("/")[1];
   const isRightRole = path === role;
-  console.log(path,role);
   
   return token?
     isRightRole? (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, Space } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { SaveOutlined } from '@ant-design/icons';
 
 import './style.scss'
 
@@ -47,16 +47,11 @@ const OrganismsWidgetFormChangePassword = ({ initialFormData, handleSubmit }) =>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  icon={<PlusOutlined />}
+                  icon={<SaveOutlined />}
                 >
                   Change Password
                 </Button>
               )}
-            </Form.Item>
-            <Form.Item >
-              <Button type="text" className="text-danger">
-                <span className="text-danger">Cancel</span>
-              </Button>
             </Form.Item>
           </Space>
         </Form>      

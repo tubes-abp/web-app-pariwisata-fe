@@ -14,7 +14,6 @@ const Login = () => {
   const history = useHistory();  
 
   const handleLogin = (values) => {
-    console.log("data: ", values)
     dispatch(auth_login("owner", values, history))
   }
   

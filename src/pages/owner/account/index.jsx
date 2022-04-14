@@ -60,8 +60,7 @@ const OwnerAccount = () => {
   const handleEditPassword = (dataEdit) => {    
     dataEdit = {
       ...dataEdit,
-    }    
-    console.log(dataEdit);
+    }
     dispatch(change_password(`/owners/change-password`, dataEdit, history, "/login/owner"));
   };
 

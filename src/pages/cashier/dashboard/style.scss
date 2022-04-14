@@ -1,3 +1,6 @@
 .p-cashier-dashboard {
   font-size: 10px;
+  @media screen and (max-width: 820px) {
+    font-size: 8px;
+  }
 }

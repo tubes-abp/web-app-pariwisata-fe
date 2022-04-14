@@ -25,6 +25,7 @@ import Register from '../pages/auth/register';
 import CashierDataTransactionAdd from '../pages/cashier/data/transaction/add';
 import PrivateRoute from '../helper/components/privateRouter';
 import OwnerAccount from '../pages/owner/account';
+import ViewportRestrict from '../helper/components/viewportRestrict';
 
 const Main = () => { 
   // const dispatch = useDispatch();  
@@ -34,6 +35,7 @@ const Main = () => {
   const { loader } = useSelector(state => state.main)
   return (
     <Router>
+      <ViewportRestrict display={true} type="portrait" />
       <Spin spinning={loader}>
         <Switch>
           <Route exact path="/" component={Register} />          

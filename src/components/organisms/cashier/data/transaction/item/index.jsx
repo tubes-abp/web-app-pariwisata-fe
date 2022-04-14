@@ -9,11 +9,11 @@ const OrganismsCashierDataTransactionItem = ({ data, handleQuantity, handleDelet
     <div className='o-cashier-data-transaction-item'>
       <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
         <Row justify="space-between" gutter={16}>
-          <Col span={12}>
+          <Col sm={{ span: 24 }} span={12}>
             <p>{ data.name }</p>
             <h2>{ "Rp"+new Intl.NumberFormat().format(data.price) }</h2>          
           </Col>
-          <Col span={12}>
+          <Col sm={{ span: 24 }} span={12}>
             <div className="o-cashier-data-transaction-item__header-text">
               <p>Quantity</p>
               <p onClick={() => handleDeleteItem(data.id)}>Delete Item</p>

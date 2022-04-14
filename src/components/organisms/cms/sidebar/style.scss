@@ -48,6 +48,17 @@
       }
     }
   }
+  @media screen and (max-width: 1000px){
+    &__profile {
+      height: 20%;
+    }
+    &__menu {
+      height: 78%;
+      .ant-menu-title-content {
+        font-size: 0.8em;
+      }
+    }    
+  }
   ul {
     width: 100%;
   }  

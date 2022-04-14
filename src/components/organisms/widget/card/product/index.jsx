@@ -21,11 +21,11 @@ const OrganismsWidgetCardProduct = ({data, addProduct}) => {
           </Col>
         </Row>
         <Row align="middle" style={{ display: 'flex' }}>
-          <Col span={6}>
+          <Col sm={{ span: 12 }} span={6}>
             <p>Stock</p>
             <h2>{ data.stock }</h2>
           </Col>
-          <Col span={11}>
+          <Col sm={{ span: 12 }} span={11}>
             <p>Harga</p>
             <h2>{ "Rp"+new Intl.NumberFormat().format(data.price) }</h2>
           </Col>

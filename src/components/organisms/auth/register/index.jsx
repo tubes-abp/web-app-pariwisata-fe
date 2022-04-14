@@ -111,7 +111,7 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
               htmlType="submit"
               block
             >
-              Masuk                  
+              Daftar                  
             </Button>              
           )}
         </Form.Item>        

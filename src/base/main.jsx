@@ -39,20 +39,20 @@ const Main = () => {
           <Route exact path="/" component={Register} />          
           <Route exact path="/login/owner" component={Login} />          
           <PrivateRoute exact path="/owner/dashboard" component={OwnerDashboard} />
-          <Route exact path="/owner/data/product" component={OwnerDataProduct} />
-          <Route exact path="/owner/data/product/add" component={OwnerDataProductAdd} />
-          <Route exact path="/owner/data/product/edit/:id" component={OwnerDataProductEdit} />
-          <Route exact path="/owner/data/transaction" component={OwnerDataTransaction} />
-          <Route exact path="/owner/cashiers" component={OwnerCashiers} />
-          <Route exact path="/owner/cashier/add" component={OwnerCashierAdd} />
-          <Route exact path="/owner/cashier/edit/:id" component={OwnerCashierEdit} />
-          <Route exact path="/owner/account" component={OwnerAccount} />
+          <PrivateRoute exact path="/owner/data/product" component={OwnerDataProduct} />
+          <PrivateRoute exact path="/owner/data/product/add" component={OwnerDataProductAdd} />
+          <PrivateRoute exact path="/owner/data/product/edit/:id" component={OwnerDataProductEdit} />
+          <PrivateRoute exact path="/owner/data/transaction" component={OwnerDataTransaction} />
+          <PrivateRoute exact path="/owner/cashiers" component={OwnerCashiers} />
+          <PrivateRoute exact path="/owner/cashier/add" component={OwnerCashierAdd} />
+          <PrivateRoute exact path="/owner/cashier/edit/:id" component={OwnerCashierEdit} />
+          <PrivateRoute exact path="/owner/account" component={OwnerAccount} />
           
           <Route exact path="/login/cashier" component={LoginCashier} />
-          <Route exact path="/cashier/dashboard" component={CashierDashboard} />
-          <Route exact path="/cashier/data/product" component={CashierDataProduct} />
-          <Route exact path="/cashier/data/transaction" component={CashierDataTransaction} />
-          <Route exact path="/cashier/data/transaction/add" component={CashierDataTransactionAdd} />
+          <PrivateRoute exact path="/cashier/dashboard" component={CashierDashboard} />
+          <PrivateRoute exact path="/cashier/data/product" component={CashierDataProduct} />
+          <PrivateRoute exact path="/cashier/data/transaction" component={CashierDataTransaction} />
+          <PrivateRoute exact path="/cashier/data/transaction/add" component={CashierDataTransactionAdd} />
           <Route component={NotFound} />
         </Switch>
       </Spin> 

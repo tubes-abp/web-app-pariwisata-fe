@@ -23,6 +23,7 @@ export const auth_login = (role, payload, history) => {
         dispatch(modal_success("Berhasil Login"));
         window.localStorage.setItem('token', res.data.access_token);
         setAxios();
+        window.localStorage.setItem('role', role);
         history.push(`/${role}/dashboard`);
       })
       .catch((err) => {      

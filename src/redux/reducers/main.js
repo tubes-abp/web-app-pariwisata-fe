@@ -1,4 +1,5 @@
 const main_state = {
+  role: false,
 	userData: false,
 	posts: false,
   loader: false,

@@ -53,7 +53,9 @@ const OwnerDashboard = () => {
     dispatch(get_data('/transactions', 'transactions'));
     // eslint-disable-next-line
   }, [])
-  const { products, transactions } = useSelector(state => state.main)  
+  const { products, transactions, role } = useSelector(state => state.main)  
+
+  console.log("role: ", role)
   
   useEffect(() => {
     const sum = transactions.map(data => data['purchase amount']).reduce((a, b) => a + b, 0);

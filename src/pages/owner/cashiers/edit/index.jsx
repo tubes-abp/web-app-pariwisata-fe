@@ -19,8 +19,8 @@ const OwnerCashierEdit = () => {
   const { id } = useParams();
 
   const activeMenu = {
-    key: 'data-cashier',
-    openKey: 'data',
+    key: 'cashier',
+    openKey: '',
   };
   const breadcrumb = [
     {

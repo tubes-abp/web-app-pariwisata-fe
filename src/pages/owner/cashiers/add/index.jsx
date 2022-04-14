@@ -14,7 +14,7 @@ const OwnerCashierAdd = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const activeMenu = {
-    key: 'cashier',
+    key: 'cashiers',
     openKey: '',
   };
   const breadcrumb = [

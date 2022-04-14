@@ -19,7 +19,7 @@ const OrganismsWidgetUploadImage = ({ initialUploadData, handleSubmit }) => {
   return (
     <div className="o-widget-upload-image">
       <div className="o-widget-upload-image__group">
-        <Avatar shape="square" src={`http://localhost:8000/storage/${initialUploadData.url}`} />
+        <Avatar shape="square" src={`${process.env.REACT_APP_API_ENDPOINT}/storage/${initialUploadData.url}`} />
         <Upload
           listType="picture"
           maxCount={1}

@@ -12,7 +12,7 @@ const OrganismsWidgetCardProduct = ({data, addProduct}) => {
         <Row gutter={16} >
           <Col span={10}>
             <div className="o-widget-card-product__img">
-              <img src={"http://localhost:8000/storage/"+data.image_url} alt="" />        
+              <img src={`${process.env.REACT_APP_API_ENDPOINT}/storage/${data.image_url}`} alt="" />
             </div>
           </Col>
           <Col span={14}>          

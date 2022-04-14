@@ -7,7 +7,7 @@ import './style.scss';
 const MoleculesInputNumber = ({ numberVal, stockMax, handleQuantity }) => {
   return (
     <div className="m-input-number">
-      <Button icon={<MinusOutlined />} onClick={() => handleQuantity(numberVal - 1)} />
+      <Button icon={<MinusOutlined />} disabled={numberVal === 1} onClick={() => handleQuantity(numberVal - 1)} />
       <InputNumber 
         min={1} 
         max={stockMax} 
@@ -15,7 +15,7 @@ const MoleculesInputNumber = ({ numberVal, stockMax, handleQuantity }) => {
         controls={false}
         onChange={handleQuantity}
       />
-      <Button icon={<PlusOutlined />} onClick={() => handleQuantity(numberVal + 1)} />
+      <Button icon={<PlusOutlined />} disabled={numberVal === stockMax} onClick={() => handleQuantity(numberVal + 1)} />
     </div>
   )
 }

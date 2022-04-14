@@ -26,4 +26,10 @@
   p {
     text-transform: capitalize;
   }
+  &.disabled {
+    border: 1px solid red;
+  }
+  .text-danger {
+    color: red;
+  }
 }

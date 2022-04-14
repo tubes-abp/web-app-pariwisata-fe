@@ -127,7 +127,8 @@ const CashierDataTransactionAdd = () => {
             </div>
             <div className="o-cashier-data-transaction-add__products-list">
               {
-                productList.map((product) => (
+                productList.map((product) => ( 
+                  product.stock > 0 &&
                   <OrganismsWidgetCardProduct 
                     data={product} 
                     addProduct={addProduct}

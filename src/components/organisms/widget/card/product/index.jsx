@@ -7,7 +7,7 @@ import './style.scss'
 
 const OrganismsWidgetCardProduct = ({data, addProduct}) => {
   return (
-    <div className='o-widget-card-product'>
+    <div className={`o-widget-card-product ${data.stock <= 0? 'disabled':''}`}>
       <Space direction="vertical" size="middle" style={{ display: '100%' }}>
         <Row gutter={16} >
           <Col span={10}>
@@ -34,6 +34,12 @@ const OrganismsWidgetCardProduct = ({data, addProduct}) => {
             <Col span={7}>
               <Button icon={<PlusOutlined />} onClick={() => addProduct(data)} >Tambah</Button>
             </Col>
+          }
+          {
+            data.stock <= 0 &&
+            <Col span={7}>
+              <p className="text-danger">Stock Abis</p>
+            </Col>          
           }
         </Row>
       </Space>

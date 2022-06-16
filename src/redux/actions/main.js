@@ -19,7 +19,6 @@ export const auth_login = (role, payload, history) => {
     axios
       .post('/auth/login-'+role, payload)
       .then((res) => {
-        console.log(res)
         dispatch(modal_success("Berhasil Login"));
         window.localStorage.setItem('token', res.data.access_token);
         setAxios();
@@ -84,7 +83,6 @@ export const post_data = (url, payload, history, nextPage) => {
 
 export const post_transaction = (payload, history) => {
   return (dispatch) => {
-    console.log(payload);
     dispatch(toggle_loader(true));
     axios
       .post('/transactions', payload[0])
@@ -175,8 +173,7 @@ export const delete_data = (url, id, state_key) => {
     dispatch(toggle_loader(true));
     axios
       .delete(`${url}/${id}`)
-      .then((res) => {        
-        console.log(res)
+      .then((res) => {
         dispatch(modal_success(res.data?.message));
       })
       .catch((err) => {

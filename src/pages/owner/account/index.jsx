@@ -52,8 +52,7 @@ const OwnerAccount = () => {
     dataEdit = {
       ...dataEdit,
       birthday: dataEdit.birthday.format('YYYY-MM-DD'),
-    }    
-    console.log(dataEdit);
+    }
     dispatch(update_data(`/owners`, dataEdit, history, '/owner/account'));
     dispatch(get_data(`/owners/current`, 'owner'));
   };

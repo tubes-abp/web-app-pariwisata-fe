@@ -51,7 +51,7 @@ const CashierDashboard = () => {
   useEffect(() => {
     const sum = transactions.map(data => data['purchase amount']).reduce((a, b) => a + b, 0);
     const currency = new Intl.NumberFormat().format(sum);
-    console.log('sum', sum)
+    
     setHighlightData([
       {
         title: "Total Product",

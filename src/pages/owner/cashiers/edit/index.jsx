@@ -58,12 +58,10 @@ const OwnerCashierEdit = () => {
     dataEdit = {
       ...dataEdit,
       birthday: dataEdit.birthday.format('YYYY-MM-DD'),
-    }    
-    console.log(dataEdit);
+    }
     dispatch(update_data(`/cashiers/${id}`, dataEdit, history, '/owner/cashiers'));
   };
   const handleEditPassword = (dataEdit) => {
-    console.log("role:", dataEdit)
     dispatch(change_password(`/cashiers/${id}/change-password`, dataEdit, history, "/owner/cashiers"));
   };
 

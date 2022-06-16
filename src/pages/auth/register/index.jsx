@@ -18,8 +18,7 @@ const Register = () => {
     values = {
       ...values,
       birthday: values.birthday.format('YYYY-MM-DD'),
-    };
-    console.log("data: ", values)
+    };    
     dispatch(post_data("/owners", values, history, '/login/owner'));
   }
 

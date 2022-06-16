@@ -14,7 +14,6 @@ const LoginCashier = () => {
   const history = useHistory();
 
   const handleLogin = (values) => {
-    console.log("data: ", values)
     dispatch(auth_login("cashier", values, history))
   }
 

@@ -50,6 +50,18 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
         >
           <Input size="large" placeholder='Phone Number' />
         </Form.Item>
+        <Form.Item          
+          name="shop"
+          required={false}
+          rules={[
+            {
+              required: true,
+              message: "Please input your Shop!",
+            },
+          ]}
+        >
+          <Input size="large" placeholder='Nama Toko' />
+        </Form.Item>
         <Form.Item
           name="email"
           required={false}
@@ -78,7 +90,7 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
           ]}
           hasFeedback
         >
-          <Input.Password size="large" placeholder="Massukan Password"  />
+          <Input.Password size="large" placeholder="Masukan Password"  />
         </Form.Item>
         <Form.Item
           name="confirm"
@@ -102,6 +114,75 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
           ]}
         >
           <Input.Password size="large" placeholder="Ulangi Password" />
+        </Form.Item>        
+        <Form.Item
+          label="Alamat Toko"
+          name="street"
+          required={false}
+          rules={[
+            {
+              required: true,
+              message: "Please input your Street!",
+            },
+          ]}
+        >
+          <Input size="large" placeholder='Alamat Jalan' />
+        </Form.Item>
+        <Form.Item
+          style={{
+            marginBottom: 0,
+          }}
+        >
+          <Form.Item
+            name="district"
+            required={false}
+            rules={[
+              {
+                required: true,
+                message: "Please input your District!",
+              },
+            ]}
+            style={{
+              display: 'inline-block',
+              width: 'calc(33% - 8px)',
+            }}
+          >
+            <Input size="large" placeholder='Kecamatan' />
+          </Form.Item>
+          <Form.Item
+            name="province"
+            required={false}
+            rules={[
+              {
+                required: true,
+                message: "Please input your province!",
+              },
+            ]}
+            style={{
+              display: 'inline-block',
+              width: 'calc(33% - 8px)',
+              marginLeft: '8px',
+            }}
+          >
+            <Input size="large" placeholder='Provinsi' />
+          </Form.Item>
+          <Form.Item
+            name="post_code"
+            required={false}
+            rules={[
+              {
+                required: true,
+                message: "Please input your Post Code!",
+              },
+            ]}
+            style={{
+              display: 'inline-block',
+              width: 'calc(33% - 8px)',
+              marginLeft: '8px',
+            }}
+          >
+            <Input size="large" placeholder='Kode pos' />
+          </Form.Item>
         </Form.Item>
         <Form.Item shouldUpdate className="btn-form">
           {() => (              
@@ -114,7 +195,7 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
               Daftar                  
             </Button>              
           )}
-        </Form.Item>        
+        </Form.Item>
       </Form>
       <div className="o-register-form__link">
         <p>Sudah Memiliki Akun?</p>

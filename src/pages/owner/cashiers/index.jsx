@@ -58,7 +58,6 @@ const OwnerCashiers = () => {
     if(cashiers.length === 0 && keyQuery) {
       dispatch(get_data('/cashiers', 'cashiers'));
     } else {
-      console.log("map:", cashiers)
       let modifyData = cashiers.map((dt) => ({
         ...dt,
         birthday: format(new Date(dt.birthday), 'dd MMMM yyyy'),

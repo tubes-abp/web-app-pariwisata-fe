@@ -46,8 +46,7 @@ const OwnerDataProductAdd = () => {
     data = {
       ...data,           
       price: parseInt(data.price)
-    };
-    console.log(data);
+    };    
     dispatch(post_data("/products", data, history, '/owner/data/product'));
   }  
   return (

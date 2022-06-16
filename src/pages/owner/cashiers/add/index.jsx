@@ -49,7 +49,6 @@ const OwnerCashierAdd = () => {
       ...data,
       birthday: data.birthday.format('YYYY-MM-DD'),
     };
-    console.log(data);
     dispatch(post_data("/cashiers", data, history, '/owner/cashiers'));
   }  
   return (

@@ -58,15 +58,13 @@ const OwnerDataProductEdit = () => {
     dataEdit = {
       ...dataEdit,
       price: parseInt(dataEdit.price)
-    }    
-    console.log(dataEdit);
+    }
     dispatch(update_data(`/products/${id}`, dataEdit, history, '/owner/data/product'));
   };
   const handleEditPic = (img) => {
     const dataUpload = {
       img
     }
-    console.log(dataUpload)
     dispatch(update_img_product(id, dataUpload, history));
   };
 

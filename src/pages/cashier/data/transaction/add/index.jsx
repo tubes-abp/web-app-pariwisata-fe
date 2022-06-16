@@ -104,7 +104,6 @@ const CashierDataTransactionAdd = () => {
         quantity: product.quantity
       }
     ))
-    console.log("newData", transactions)
     dispatch(post_transaction(transactions, history));
   }  
   return (

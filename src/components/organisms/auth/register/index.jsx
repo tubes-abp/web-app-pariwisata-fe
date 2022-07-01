@@ -184,6 +184,18 @@ const OrganismsAuthRegister = ({ handleRegister }) => {
             <Input size="large" placeholder='Kode pos' />
           </Form.Item>
         </Form.Item>
+        <Form.Item          
+          name="link_map"
+          required={false}
+          rules={[
+            {
+              required: true,
+              message: "Please input your Link Map!",
+            },
+          ]}
+        >
+          <Input size="large" placeholder='Link Maps' />
+        </Form.Item>
         <Form.Item shouldUpdate className="btn-form">
           {() => (              
             <Button
